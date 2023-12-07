@@ -1,8 +1,6 @@
 HELP.md
 target/
-src/main/resources/application.properties
-src/main/resources/schema.sql
-src/main/resources/data.sql
+
 !.mvn/wrapper/maven-wrapper.jar
 !**/src/main/**/target/
 !**/src/test/**/target/
