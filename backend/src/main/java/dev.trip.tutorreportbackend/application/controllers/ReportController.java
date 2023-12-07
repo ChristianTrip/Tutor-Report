@@ -10,7 +10,13 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/reports")
-@CrossOrigin(value = "http://localhost:3000")
+@CrossOrigin(
+        origins = "http://localhost:3000",
+        methods = {
+                RequestMethod.GET,
+                RequestMethod.POST
+        }
+)
 public class ReportController {
 
     private final ReportService reportService;

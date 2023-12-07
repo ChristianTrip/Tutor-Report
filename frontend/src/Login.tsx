@@ -43,7 +43,7 @@ const LoginPage: React.FC = () => {
         <div className="container mt-5">
             <h2>Login Page</h2>
             <form>
-                <div className="mb-3">
+                <div className="mb-3 w-75">
                     <label htmlFor="email" className="form-label">Email:</label>
                     <input
                         type="email"
@@ -53,7 +53,7 @@ const LoginPage: React.FC = () => {
                         onChange={(e) => setEmail(e.target.value)}
                     />
                 </div>
-                <div className="mb-3">
+                <div className="mb-3 w-75">
                     <label htmlFor="password" className="form-label">Password:</label>
                     <input
                         type="password"

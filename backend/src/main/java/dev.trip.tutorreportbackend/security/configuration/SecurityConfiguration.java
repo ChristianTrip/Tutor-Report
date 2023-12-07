@@ -60,7 +60,7 @@ public class SecurityConfiguration {
                 .authorizeHttpRequests((authorize) -> authorize
                         .requestMatchers("auth/register").hasRole(Role.ADMIN.getAuthority())
                         .requestMatchers("auth/login").permitAll()
-                        .requestMatchers("reports/**").authenticated()
+                        .requestMatchers("reports/**").authenticated()//hasRole(Role.USER.getAuthority())
                         .requestMatchers("user/admin/**").hasRole(Role.ADMIN.getAuthority())
                         .requestMatchers("/tutor/**").hasRole(Role.USER.getAuthority())
                         .anyRequest().authenticated()

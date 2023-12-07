@@ -5,6 +5,10 @@ import MainPage from './MainPage';
 import LoginPage from "./Login";
 import CreateReportPage from "./CreateReportPage";
 import NavigationBar from './NavigationBar';
+import LoginForm from "./components/LoginForm";
+import MyForm from "./components/ReportFormFull";
+import TopNavigationBar from "./components/NavigationBar";
+import ReportFormFull from "./components/ReportFormFull";
 
 const App: React.FC = () => {
     return (
@@ -22,11 +26,11 @@ const AppContent: React.FC = () => {
 
     return (
         <>
-            {!isLoginPage && <NavigationBar />} {/* Render NavigationBar for all pages except the login page */}
+            {!isLoginPage && <TopNavigationBar />} {/* Render NavigationBar for all pages except the login page */}
             <Switch>
-                <Route path="/login" component={LoginPage} />
+                <Route path="/login" component={LoginForm} />
                 <Route path="/dashboard" component={MainPage} />
-                <Route path="/create-report" component={CreateReportPage} />
+                <Route path="/create-report" component={ReportFormFull} />
                 {/* Add other routes as needed */}
             </Switch>
         </>

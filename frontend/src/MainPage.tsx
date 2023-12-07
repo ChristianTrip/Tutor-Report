@@ -1,8 +1,6 @@
 // src/components/MainPage.tsx
 import React from 'react';
 import { Redirect, useHistory } from 'react-router-dom';
-import NavigationBar from './NavigationBar';
-import CreateReportPage from './CreateReportPage';
 
 const MainPage: React.FC = () => {
     const history = useHistory();
@@ -12,7 +10,7 @@ const MainPage: React.FC = () => {
         localStorage.removeItem('token');
 
         // Redirect to the login page
-        history.push('/login');
+        history.push('/');
     };
 
     // Check if the user is authenticated (has a token)
@@ -20,7 +18,7 @@ const MainPage: React.FC = () => {
 
     if (!isAuthenticated) {
         // Redirect to the login page if not authenticated
-        return <Redirect to="/login" />;
+        return <Redirect to="/" />;
     }
 
     let email: string|null = localStorage.getItem('email') || '';

@@ -10,7 +10,13 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/auth")
-@CrossOrigin(value = "http://localhost:3000")
+@CrossOrigin(
+        origins = "http://localhost:3000",
+        methods = {
+                RequestMethod.GET,
+                RequestMethod.POST
+        }
+)
 public class AuthenticationController {
 
     private final AuthenticationService authenticationService;
@@ -33,6 +39,9 @@ public class AuthenticationController {
 
     @PostMapping("/login")
     public ResponseEntity<LoginResponse> loginUser(@RequestBody LoginRequest userRequest){
+        System.out.println("\n-----------------");
+        System.out.println("--Trying to login");
+        System.out.println("\n-----------------");
         LoginResponse loginResponse = authenticationService.loginUser(userRequest.email(), userRequest.password());
         return ResponseEntity.ok().body(loginResponse);
     }

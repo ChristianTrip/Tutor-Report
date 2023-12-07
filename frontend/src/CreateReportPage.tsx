@@ -5,14 +5,18 @@ import { format } from 'date-fns';
 
 const CreateReportPage: React.FC = () => {
 
-    type reportRequest = {
-        problem: string;
-        solution: string;
-        duration: string;
-        semester: string;
-        courseClassName: string;
-        date: Date
-    };
+    function createRequest(method: string, bodyValues: any): RequestInit{
+        return  {
+            method: method,
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer ' + localStorage.getItem("token")
+            },
+            body: JSON.stringify(bodyValues)
+        }
+    }
+
+
 
     const [problem, setProblem] = useState<string>('');
     const [solution, setSolution] = useState<string>('');
@@ -20,6 +24,9 @@ const CreateReportPage: React.FC = () => {
     const [semester, setSemester] = useState<string>('');
     const [courseClassName, setCourseClassName] = useState<string>('');
     const [selectedDate, setSelectedDate] = useState<Date | null>(null);
+
+
+
     const handleSubmit = async (event: React.FormEvent) => {
         event.preventDefault();
         const endpoint: string = 'api/reports/add/' + localStorage.getItem("email");
@@ -27,19 +34,19 @@ const CreateReportPage: React.FC = () => {
 
         const date = selectedDate ? format(selectedDate, 'yyyy-MM-dd') : '';
 
+        const reportRequest = createRequest(
+            'POST',
+            {problem, solution, duration, semester, courseClassName, date}
+        )
+
         try {
-            const response = await fetch(endpoint, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({problem, solution, duration, semester, courseClassName, date}),
-            });
+            const response = await fetch(endpoint, reportRequest);
             console.log(JSON.stringify({problem, solution, duration, semester, courseClassName, date}))
 
             if (response.ok) {
                 const data = await response.json();
                 console.log(data);
+                console.log('It updated, so i dont have to redeploy each time!!');
 
 
             } else {
