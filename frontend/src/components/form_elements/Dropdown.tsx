@@ -1,5 +1,5 @@
 import {Col, Dropdown, Form, Row} from "react-bootstrap";
-import React from "react";
+import React, {CSSProperties} from "react";
 
 
 interface Props {
@@ -7,21 +7,22 @@ interface Props {
     options: string[];
     selectedOption: String | null;
     event: (eventKey: string | null) => void;
+    style: CSSProperties | undefined;
 }
 
-export default function MyDropdown({label, options, selectedOption, event}: Props){
+export default function DropdownMenu({label, options, selectedOption, event, style}: Props){
     return (
-        <Form.Group as={Row} className="mb-3">
+        <Form.Group as={Row} className="mb-3 w-100">
             <Form.Label column sm={2}>
                 {label}
             </Form.Label>
             <Col sm={10}>
                 <Dropdown onSelect={event}>
-                    <Dropdown.Toggle variant="success" id="dropdown-basic">
-                        {selectedOption || '_'}
+                    <Dropdown.Toggle variant="success" id="dropdown-basic" style={style}>
+                        {selectedOption || label }
                     </Dropdown.Toggle>
                     <Dropdown.Menu>
-                        {mapper(options)}
+                        {mapItems(options)}
                     </Dropdown.Menu>
                 </Dropdown>
             </Col>
@@ -29,7 +30,7 @@ export default function MyDropdown({label, options, selectedOption, event}: Prop
     )
 }
 
-function mapper(list: string[]) {
+function mapItems(list: string[]) {
     if (list.length === 0){
         return <p>no items in list..</p>
     }

@@ -10,7 +10,7 @@ const MainPage: React.FC = () => {
         localStorage.removeItem('token');
 
         // Redirect to the login page
-        history.push('/');
+        history.push('/login');
     };
 
     // Check if the user is authenticated (has a token)
@@ -18,7 +18,7 @@ const MainPage: React.FC = () => {
 
     if (!isAuthenticated) {
         // Redirect to the login page if not authenticated
-        return <Redirect to="/" />;
+        return <Redirect to="/login" />;
     }
 
     let email: string|null = localStorage.getItem('email') || '';

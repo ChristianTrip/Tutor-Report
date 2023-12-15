@@ -41,7 +41,7 @@ public class User implements UserDetails {
             nullable = true,
             updatable = true
     )
-    protected String LastName;
+    protected String lastName;
 
     @Id
     @Column(
@@ -83,7 +83,7 @@ public class User implements UserDetails {
     private LocalDateTime edited;
 
     @Enumerated(EnumType.STRING)
-    @Column(columnDefinition = "ENUM('USER','ADMIN')")
+    @Column(unique = true, columnDefinition = "ENUM('USER','ADMIN')")
     @ElementCollection(fetch = FetchType.LAZY)
     @CollectionTable(
             name = "user_authorities",
@@ -94,14 +94,14 @@ public class User implements UserDetails {
 
     public User(String firstName, String lastName, String email, String password) {
         this.firstName = firstName;
-        LastName = lastName;
+        this.lastName = lastName;
         this.email = email;
         this.password = password;
     }
 
     public User(String firstName, String lastName, String email, String password, boolean lockedAccount, boolean enabledAccount) {
         this.firstName = firstName;
-        LastName = lastName;
+        this.lastName = lastName;
         this.email = email;
         this.password = password;
         this.lockedAccount = lockedAccount;

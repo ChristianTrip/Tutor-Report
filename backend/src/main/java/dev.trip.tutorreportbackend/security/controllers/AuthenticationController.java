@@ -37,6 +37,7 @@ public class AuthenticationController {
         return userRequest.email()  + " is successfully registered!";
     }
 
+    //@CrossOrigin(origins = "http://localhost:3000")
     @PostMapping("/login")
     public ResponseEntity<LoginResponse> loginUser(@RequestBody LoginRequest userRequest){
         System.out.println("\n-----------------");

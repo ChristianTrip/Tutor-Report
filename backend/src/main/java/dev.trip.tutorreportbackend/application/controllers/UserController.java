@@ -35,6 +35,7 @@ public class UserController {
         return tutorService.getTutors();
     }
 
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @PutMapping("/user/")
     public UserResponse editUser(@RequestBody UserRequest userRequest){
         return userService.editUser(userRequest);
