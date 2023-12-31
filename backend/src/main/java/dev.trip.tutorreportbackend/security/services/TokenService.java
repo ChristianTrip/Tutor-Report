@@ -31,17 +31,6 @@ public class TokenService {
     public String generateToken(Authentication authentication){
 
         User user = (User) authentication.getPrincipal();
-        System.out.println("------------------------------------------");
-        System.out.println("------------------------------------------");
-        System.out.println("Principal: " + authentication.getPrincipal());
-        System.out.println("Authorities: " + authentication.getAuthorities());
-        System.out.println("Name: " + authentication.getName());
-        System.out.println("Details: " + authentication.getDetails());
-        System.out.println("Credentials: " + authentication.getCredentials());
-        System.out.println("is authenticated: " + authentication.isAuthenticated());
-        System.out.println("------------------------------------------");
-        System.out.println("------------------------------------------");
-
         Instant currentTime = Instant.now();
 
         String scope = authentication.getAuthorities().stream()

@@ -1,6 +1,7 @@
 package dev.trip.tutorreportbackend.application.models.dto;
 
 import dev.trip.tutorreportbackend.application.models.entities.Duration;
+import dev.trip.tutorreportbackend.application.models.entities.Education;
 import dev.trip.tutorreportbackend.application.models.entities.Semester;
 
 
@@ -11,7 +12,7 @@ public record ReportRequest(
         String solution,
         Duration duration,
         Semester semester,
-        String courseClassName,
+        Education education,
         LocalDate date
 ) {
 }

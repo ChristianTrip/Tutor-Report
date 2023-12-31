@@ -16,17 +16,17 @@ CREATE TABLE IF NOT EXISTS tutorreportdb.user_authorities
 (
     authorities enum ('USER', 'ADMIN') null,
     user_email  varchar(255)           not null,
+    UNIQUE (authorities, user_email),
     constraint fkey_user_role
         foreign key (user_email) references users (email)
 );
-
 
 CREATE TABLE IF NOT EXISTS tutorreportdb.reports
 (
     date              date                                                                                                      not null,
     id                int auto_increment
         primary key,
-    course_class_name varchar(255)                                                                                              null,
+    education         enum ('DAT', 'ITA')                                                                                       null,
     duration          enum ('FIFTY_MIN', 'FIVE_MIN', 'FORTY_MIN', 'HALF_HOUR', 'HOUR', 'OVER_AN_HOUR', 'TEN_MIN', 'TWENTY_MIN') not null,
     problem           text                                                                                                      not null,
     semester          enum ('FIFTH', 'FIRST', 'FOURTH', 'SECOND', 'THIRD')                                                      not null,

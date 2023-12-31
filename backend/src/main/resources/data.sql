@@ -9,6 +9,6 @@ INSERT INTO tutorreportdb.user_authorities(authorities, user_email) VALUES ('USE
 INSERT INTO tutorreportdb.user_authorities(authorities, user_email) VALUES ('USER','eric@mail.com');
 INSERT INTO tutorreportdb.user_authorities(authorities, user_email) VALUES ('ADMIN','eric@mail.com');
 
-INSERT INTO tutorreportdb.reports(`date`,`id`,`course_class_name`,`duration`,`problem`,`semester`,`solution`,`tutor_email`) VALUES ('2023-11-14',1,'dat23d','HOUR','Updated problem','FIRST','Updated solution','peter@mail.com');
-INSERT INTO tutorreportdb.reports(`date`,`id`,`course_class_name`,`duration`,`problem`,`semester`,`solution`,`tutor_email`) VALUES ('2023-11-28',2,'Dat23c','TEN_MIN','For-loops index out of bounds','FIRST','change the end condition to: i < array.lenght','peter@mail.com');
-INSERT INTO tutorreportdb.reports(`date`,`id`,`course_class_name`,`duration`,`problem`,`semester`,`solution`,`tutor_email`) VALUES ('2023-11-30',3,'Dat23c','FIVE_MIN','Docker image wont run a container','THIRD','The student was using the wrong command in the terminal, was missing the run command..','alice@mail.com');
+INSERT INTO tutorreportdb.reports(`date`,`id`,`education`,`duration`,`problem`,`semester`,`solution`,`tutor_email`) VALUES ('2023-11-14',1,'DAT','HOUR','Updated problem','FIRST','Updated solution','peter@mail.com');
+INSERT INTO tutorreportdb.reports(`date`,`id`,`education`,`duration`,`problem`,`semester`,`solution`,`tutor_email`) VALUES ('2023-11-28',2,'ITA','TEN_MIN','For-loops index out of bounds','FIRST','change the end condition to: i < array.lenght','peter@mail.com');
+INSERT INTO tutorreportdb.reports(`date`,`id`,`education`,`duration`,`problem`,`semester`,`solution`,`tutor_email`) VALUES ('2023-11-30',3,'DAT','FIVE_MIN','Docker image wont run a container','THIRD','The student was using the wrong command in the terminal, was missing the run command..','alice@mail.com');

@@ -5,25 +5,30 @@ import dev.trip.tutorreportbackend.application.models.dto.TutorResponse;
 import dev.trip.tutorreportbackend.application.models.dto.UserResponse;
 import dev.trip.tutorreportbackend.application.services.TutorService;
 import dev.trip.tutorreportbackend.security.services.UserService;
-import org.springframework.security.access.prepost.PreAuthorize;
+import lombok.AllArgsConstructor;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@AllArgsConstructor
 @RestController
 @RequestMapping("/users")
-@CrossOrigin(value = "http://localhost:3000")
+@CrossOrigin(
+        origins = "http://localhost:3000",
+        methods = {
+                RequestMethod.GET,
+                RequestMethod.POST,
+                RequestMethod.DELETE,
+                RequestMethod.PUT
+        }
+)
 public class UserController {
 
     private final UserService userService;
     private final TutorService tutorService;
 
-    public UserController(UserService userService, TutorService tutorService) {
-        this.userService = userService;
-        this.tutorService = tutorService;
-    }
 
     @GetMapping("")
     public List<UserResponse> getAllUsers(){
@@ -35,16 +40,13 @@ public class UserController {
         return tutorService.getTutors();
     }
 
-    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @PutMapping("/user/")
     public UserResponse editUser(@RequestBody UserRequest userRequest){
         return userService.editUser(userRequest);
     }
 
-    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @DeleteMapping("/{email}")
     public String deleteUser(@PathVariable String email){
-        System.out.println("email......................" + email);
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         if (auth != null && auth.getAuthorities().stream().anyMatch(a -> a.getAuthority().equals("ADMIN"))) {
             userService.removeUser(email);

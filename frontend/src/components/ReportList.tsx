@@ -2,20 +2,20 @@ import {Button, Container, Form, ListGroup} from "react-bootstrap";
 import React, {MouseEvent, useEffect, useState} from "react";
 import {createGetRequestWithToken} from "./CreateRequest";
 import DateInput, {DateSpanInput} from "./form_elements/DatePicker";
+import ReportCard from "./form_elements/ReportCard";
+import {durationOptions, semesterOptions} from "./form_elements/DropdownOptions";
 
 
 interface Report {
     date: Date;
     semester: string;
+    education: string;
     duration: string;
     problem: string;
     solution: string;
     [key: string]: Date | string;
 }
 
-
-const semesterOptions = ['1. semester', '2. semester', '3. semester', '4. semester', '5. semester'];
-const durationOptions = ['5 min', '10 min', '20 min', '30 min', '40 min', '50 min', '1 time', 'Over 1 time'];
 
 function ReportList(){
     const [reports, setReports] = useState<Report[]>([]);
@@ -40,9 +40,11 @@ function ReportList(){
                     const data = await response.json();
                     const reportsWithDateAsDate = data.map((report: Report) => ({
                         ...report,
-                        date: new Date(report.date),
+
+                        date: new Date(new Intl.DateTimeFormat('en-US').format(new Date(report.date)))
                     }));
                     setReports(reportsWithDateAsDate);
+                    console.log(reportsWithDateAsDate);
                 } else {
                     console.error('Report failed');
                 }
@@ -87,7 +89,7 @@ function ReportList(){
         });
     };
 
-    const sortedAndFilteredReports = handleFilter().sort((a, b) => {
+    const sortedAndFilteredReports: Report[] = handleFilter().sort((a, b) => {
         const aValue = a[sortAttribute];
         const bValue = b[sortAttribute];
 
@@ -131,8 +133,8 @@ function ReportList(){
                 >
                     <option value="">Vælg semester</option>
                     {semesterOptions.map((semester, index) => (
-                        <option key={index} value={semester}>
-                            {semester}
+                        <option key={index} value={semester.display}>
+                            {semester.display}
                         </option>
                     ))}
                 </Form.Control>
@@ -144,12 +146,16 @@ function ReportList(){
                 >
                     <option value="">Vælg varighed</option>
                     {durationOptions.map((duration, index) => (
-                        <option key={index} value={duration}>
-                            {duration}
+                        <option key={index} value={duration.display}>
+                            {duration.display}
                         </option>
                     ))}
                 </Form.Control>
                 <br/>
+            </div>
+            <div className="mb-2">
+                <strong>Antal rapporter: </strong>
+                <span>{sortedAndFilteredReports.length}</span>
             </div>
             <ListGroup>
                 {reportMapper(sortedAndFilteredReports)}
@@ -175,23 +181,7 @@ function reportMapper(list: Report[]) {
     return <ListGroup>
         {list.map((report, index) => (
             <ListGroup.Item key={index}>
-                <strong>Uddannelse:</strong> {report.semester} <br/>
-                <strong>Semester:</strong> {report.semester} <br/>
-                <strong>Varighed:</strong> {report.duration} <br/>
-                <strong>Problem:</strong> {report.problem.split('\n').map((line, i) => (
-                <React.Fragment key={i}>
-                    {line}
-                    <br/>
-                </React.Fragment>
-            ))}
-                <br/>
-                <strong>Løsning:</strong> {report.solution.split('\n').map((line, i) => (
-                <React.Fragment key={i}>
-                    {line}
-                    <br />
-                </React.Fragment>
-            ))}
-                <br />
+                <ReportCard report={report} showDate={false} />
             </ListGroup.Item>
         ))}
     </ListGroup>

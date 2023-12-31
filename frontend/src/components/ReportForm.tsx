@@ -7,34 +7,16 @@ import Button from "react-bootstrap/Button";
 import TextArea from "./form_elements/TextArea";
 import {createRequestWithToken} from "./CreateRequest";
 import MissingInfoAlert from "./form_elements/MissingInfoAlert";
+import FormReview from "./FormReview";
+import {Option, durationOptions, educationOptions, semesterOptions} from "./form_elements/DropdownOptions";
 
 // Register the Danish locale
 
 
-const semesterOptions = [
-    { display: '1. semester', value: 'FIRST' },
-    { display: '2. semester', value: 'SECOND' },
-    { display: '3. semester', value: 'THIRD' },
-    { display: '4. semester', value: 'FOURTH' },
-    { display: '5. semester', value: 'FIFTH' },
-];
 
-const durationOptions = [
-    { display: '5 min', value: 'FIVE_MIN' },
-    { display: '10 min', value: 'TEN_MIN' },
-    { display: '20 min', value: 'TWENTY_MIN' },
-    { display: '30 min', value: 'HALF_HOUR' },
-    { display: '40 min', value: 'FORTY_MIN' },
-    { display: '50 min', value: 'FIFTY_MIN' },
-    { display: '1 time', value: 'HOUR' },
-    { display: 'Over 1 time', value: 'OVER_AN_HOUR' }
-    // Add more options as needed
-];
 
 // Create the MyForm component
 const MyForm: React.FC = () => {
-
-
 
     // useState is a hook, and returns an array.
     // first thing in the array is the current state, the second is the function that updates the state.
@@ -42,23 +24,30 @@ const MyForm: React.FC = () => {
 
     const [problem, setProblem] = useState<string>('');
     const [solution, setSolution] = useState<string>('');
-    const [duration, setDuration] = useState<string | null>(null);
-    const [semester, setSemester] = useState<string | null>(null);
-    const [courseClassName, setCourseClassName] = useState<string | null>(null);
+    const [duration, setDuration] = useState<Option | null>(null);
+    const [semester, setSemester] = useState<Option | null>(null);
+    const [education, setEducation] = useState<Option | null>(null);
     const [showAlert, setShowAlert] = useState(false);
     const [showConfirmation, setShowConfirmation] = useState(false);
+    const [showSuccessAlert, setShowSuccessAlert] = useState(false);
+
 
     const handleDateChange = (date: Date | null) => {
         setSelectedDate(date);
     };
     const handleSemesterChange = (eventKey: string | null) => {
-        setSemester(eventKey);
+        const selectedOption = semesterOptions.find(option => option.display === eventKey);
+        setSemester(selectedOption ? selectedOption : null);
     };
+
     const handleDurationChange = (eventKey: string | null) => {
-        setDuration(eventKey);
+        const selectedOption = durationOptions.find(option => option.display === eventKey);
+        setDuration(selectedOption ? selectedOption : null);
     };
-    const handleCourseNameChange = (eventKey: string | null) => {
-        setCourseClassName(eventKey);
+
+    const handleEducationChange = (eventKey: string | null) => {
+        const selectedOption = educationOptions.find(option => option.display === eventKey);
+        setEducation(selectedOption ? selectedOption : null);
     };
 
     const handleProblemChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -71,7 +60,7 @@ const MyForm: React.FC = () => {
 
     const handleSubmit = async (event: React.FormEvent) => {
         event.preventDefault();
-        if (!selectedDate || !semester || !duration || !courseClassName || !problem || !solution) {
+        if (!selectedDate || !semester || !duration || !education || !problem || !solution) {
             setShowAlert(true);
             return;
         }
@@ -86,7 +75,6 @@ const MyForm: React.FC = () => {
 
         if (confirmed){
             sendRequest().then();
-
         }
     };
 
@@ -96,16 +84,43 @@ const MyForm: React.FC = () => {
 
         const date = selectedDate ? format(selectedDate, 'yyyy-MM-dd') : '';
 
+        let durationValue;
+        if (duration){
+            durationValue = duration.value;
+        }
+        let semesterValue;
+        if (semester){
+            semesterValue = semester.value;
+        }
+        let educationValue;
+        if (education){
+            educationValue = education.value;
+        }
+
+
         const reportRequest = createRequestWithToken(
             'POST',
-            {problem, solution, duration, semester, courseClassName, date}
+            {
+                problem: problem + "\n",
+                solution :solution + "\n",
+                duration: durationValue,
+                semester: semesterValue,
+                education: educationValue,
+                date: date
+            }
         )
 
         try {
             const response = await fetch(url, reportRequest);
 
+            console.log(reportRequest);
             if (response.ok) {
+                setShowSuccessAlert(true);
+                setTimeout(() => {
+                    setShowSuccessAlert(false); // Hide the success alert after a certain duration (e.g., 3000 milliseconds)
+                }, 3000);
                 console.log('Report got send');
+
             } else {
                 console.error('Report failed');
             }
@@ -114,7 +129,6 @@ const MyForm: React.FC = () => {
             console.error('Error during report creation:', error);
         }
         setShowAlert(false);
-        console.log('Form submitted successfully!');
     }
 
 
@@ -123,13 +137,18 @@ const MyForm: React.FC = () => {
             <Form style={{ maxWidth: '700px', margin: 'auto', padding: '20px' }}>
                 {
                     showAlert && (
-                    <MissingInfoAlert
-                        errorMessage={"Emner mangler at blive udfyldt"}
-                        answer={"Alle informationer er vigtige :)"}
-                        onClose={() => setShowAlert(false)}
-                    />
+                        <MissingInfoAlert
+                            errorMessage={"Emner mangler at blive udfyldt"}
+                            answer={"Alle informationer er vigtige :)"}
+                            onClose={() => setShowAlert(false)}
+                        />
                     )
                 }
+                {showSuccessAlert && (
+                    <Alert variant="success" className="mt-3">
+                        Rapporten blev sendt succesfuldt!
+                    </Alert>
+                )}
                 <DateInput
                     key={"Dato"}
                     label="Dato"
@@ -139,7 +158,7 @@ const MyForm: React.FC = () => {
                 <DropdownMenu
                     key={"Semester"}
                     label='Semester'
-                    options={semesterOptions.map(option => option.display)}
+                    options={semesterOptions}
                     selectedOption={semester}
                     event={handleSemesterChange}
                     style={boxStyle}
@@ -147,17 +166,17 @@ const MyForm: React.FC = () => {
                 <DropdownMenu
                     key={"Varighed"}
                     label='Varighed'
-                    options={durationOptions.map(option => option.display)}
+                    options={durationOptions}
                     selectedOption={duration}
                     event={handleDurationChange}
                     style={boxStyle}
                 />
                 <DropdownMenu
-                    key={"Klasse"}
-                    label='Klasse'
-                    options={['Dat21a', "Dat21b"]}
-                    selectedOption={courseClassName}
-                    event={handleCourseNameChange}
+                    key={"Uddannelse"}
+                    label='Uddannelse'
+                    options={educationOptions}
+                    selectedOption={education}
+                    event={handleEducationChange}
                     style={boxStyle}
                 />
                 <TextArea
@@ -189,22 +208,21 @@ const MyForm: React.FC = () => {
                 </Button>
             </Form>
 
-            <Modal show={showConfirmation} onHide={() => handleConfirmation(false)}>
-                <Modal.Header closeButton>
-                    <Modal.Title>Indsend Rapport</Modal.Title>
-                </Modal.Header>
-                <Modal.Body>
-                    Er du sikker på at du vil indsende rapporten?
-                </Modal.Body>
-                <Modal.Footer>
-                    <Button variant="secondary" onClick={() => handleConfirmation(false)}>
-                        Annuller
-                    </Button>
-                    <Button variant="primary" onClick={() => handleConfirmation(true)}>
-                        Indsend
-                    </Button>
-                </Modal.Footer>
-            </Modal>
+            {showConfirmation && (
+                <FormReview
+                    selectedDate={selectedDate}
+                    semester={semester}
+                    duration={duration}
+                    education={education}
+                    problem={problem}
+                    solution={solution}
+                    onCancel={() => setShowConfirmation(false)}
+                    onConfirm={async () => {
+                        setShowConfirmation(false);
+                        await sendRequest();
+                    }}
+                />
+            )}
 
         </Container>
     );

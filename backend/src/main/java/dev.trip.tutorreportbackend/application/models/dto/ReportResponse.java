@@ -9,6 +9,7 @@ public record ReportResponse(
         String solution,
         String duration,
         String semester,
+        String education,
         LocalDate date
 )
 {

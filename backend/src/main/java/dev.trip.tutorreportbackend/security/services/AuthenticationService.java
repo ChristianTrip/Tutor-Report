@@ -4,6 +4,7 @@ import dev.trip.tutorreportbackend.security.dto.LoginResponse;
 import dev.trip.tutorreportbackend.security.entities.Role;
 import dev.trip.tutorreportbackend.security.entities.User;
 import dev.trip.tutorreportbackend.security.repositories.UserRepository;
+import lombok.AllArgsConstructor;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -17,6 +18,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
+@AllArgsConstructor
 @Service
 @Transactional
 public class AuthenticationService {
@@ -26,12 +28,7 @@ public class AuthenticationService {
     private final TokenService tokenService;
     private final PasswordEncoder passwordEncoder;
 
-    public AuthenticationService(UserRepository userRepository, AuthenticationManager authenticationManager, TokenService tokenService, PasswordEncoder passwordEncoder) {
-        this.userRepository = userRepository;
-        this.authenticationManager = authenticationManager;
-        this.tokenService = tokenService;
-        this.passwordEncoder = passwordEncoder;
-    }
+
 
     public void registerUser(String email, String password){
 
@@ -51,17 +48,10 @@ public class AuthenticationService {
 
     public LoginResponse loginUser(String email, String password) {
 
-        System.out.println("Email: " + email);
-        System.out.println("Password: " + password);
-
         try{
             UsernamePasswordAuthenticationToken uat = new UsernamePasswordAuthenticationToken(email, password);
             System.out.println("UAT: " + uat);
             Authentication authentication = authenticationManager.authenticate(uat);
-
-            System.out.println("++++++++++++++++++++++++++++++++++");
-            System.out.println("++++++++++++++++++++++++++++++++++");
-            System.out.println("++++++++++++++++++++++++++++++++++");
 
             String token = tokenService.generateToken(authentication);
 
@@ -71,13 +61,8 @@ public class AuthenticationService {
             List<String> rolesForUser = user.getAuthorities().stream().map(Object::toString).toList();
 
             return new LoginResponse(user.getEmail(), token, rolesForUser);
-
         }
         catch(AuthenticationException e){
-
-            SecurityContext sc = SecurityContextHolder.getContext();
-            //sc.setAuthentication(authentication);
-            System.out.println("Security Context: " + sc.getAuthentication());
             return new LoginResponse(null, "", null);
         }
     }

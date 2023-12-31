@@ -18,6 +18,7 @@ public class ReportMapper implements Function<Report, ReportResponse> {
                 report.getSolution(),
                 report.getDuration().toString(),
                 report.getSemester().toString(),
+                report.getEducation().toString(),
                 report.getDate()
         );
     }

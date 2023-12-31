@@ -7,6 +7,7 @@ import dev.trip.tutorreportbackend.application.models.dto.ReportRequest;
 import dev.trip.tutorreportbackend.application.models.dto.ReportResponse;
 import dev.trip.tutorreportbackend.application.models.entities.Duration;
 import dev.trip.tutorreportbackend.application.repositories.ReportRepository;
+import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
@@ -15,6 +16,7 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.stream.Collectors;
 
+@AllArgsConstructor
 @Service
 public class ReportService {
 
@@ -22,11 +24,6 @@ public class ReportService {
     private final TutorRepository tutorRepository;
     private final ReportMapper reportMapper;
 
-    public ReportService(ReportRepository reportRepository, TutorRepository tutorRepository, ReportMapper reportMapper) {
-        this.reportRepository = reportRepository;
-        this.tutorRepository = tutorRepository;
-        this.reportMapper = reportMapper;
-    }
 
     public void addReport(String email, Report report){
         Tutor tutor = tutorRepository.findByEmail(email).orElseThrow(
@@ -37,8 +34,6 @@ public class ReportService {
     }
 
     public void addReport(String userEmail, ReportRequest reportRequest){
-        System.out.println("user email: " + userEmail);
-        System.out.println("reports request: " + reportRequest);
         Tutor tutor = tutorRepository.findByEmail(userEmail).orElseThrow(
                 () -> new ResponseStatusException(HttpStatus.NOT_FOUND, "tutor not found")
         );
@@ -47,15 +42,10 @@ public class ReportService {
                 reportRequest.solution(),
                 reportRequest.duration(),
                 reportRequest.semester(),
-                reportRequest.courseClassName(),
+                reportRequest.education(),
                 reportRequest.date()
         );
         report.setTutor(tutor);
-
-        System.out.println("--------Iiiiiiiiiiiiiiiii------");
-        System.out.println(tutor);
-        System.out.println(report);
-        System.out.println("-------------------------------");
 
         reportRepository.save(report);
     }
@@ -131,7 +121,7 @@ public class ReportService {
         report.setSolution(reportRequest.solution());
         report.setDuration(reportRequest.duration());
         report.setSemester(reportRequest.semester());
-        report.setCourseClassName(reportRequest.courseClassName());
+        report.setEducation(reportRequest.education());
         report.setDate(reportRequest.date());
 
         reportRepository.save(report);

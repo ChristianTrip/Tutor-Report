@@ -87,30 +87,29 @@ public class SecurityConfiguration {
 
 
     @Bean
-    public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception{
-
-        httpSecurity
-                .cors(httpSecurityCorsConfigurer -> httpSecurityCorsConfigurer.configurationSource(corsConfigurationSource()))
-                .csrf(AbstractHttpConfigurer::disable) // Cross-Site Request Forgery (CSRF)
-                .authorizeHttpRequests((authorize) -> authorize
-                        .requestMatchers("auth/register").hasRole(Role.ADMIN.getAuthority())
-                        .requestMatchers("auth/login").permitAll()
-                        .requestMatchers("reports/**").authenticated()//hasRole(Role.USER.getAuthority())
-                        .requestMatchers("user/admin/**").hasRole(Role.ADMIN.getAuthority())
-                        .requestMatchers("/tutor/**").hasRole(Role.USER.getAuthority())
-                        .anyRequest().authenticated()
+    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception{
+        http
+            .cors(httpSecurityCorsConfigurer -> httpSecurityCorsConfigurer.configurationSource(corsConfigurationSource()))
+            .csrf(AbstractHttpConfigurer::disable)
+            .authorizeHttpRequests((authorize) -> authorize
+                .requestMatchers("auth/register").hasRole(Role.ADMIN.getAuthority())
+                .requestMatchers("auth/login").permitAll()
+                .requestMatchers("reports/**").authenticated()//hasRole(Role.USER.getAuthority())
+                .requestMatchers("users/**").hasRole(Role.ADMIN.getAuthority())
+                .requestMatchers("/tutor/**").hasRole(Role.USER.getAuthority())
+                .anyRequest().authenticated()
+            )
+            .oauth2ResourceServer(server -> server
+                .jwt(token -> token
+                    .jwtAuthenticationConverter(getJWTConverter())
+                    .decoder(getJWTDecoder())
                 )
-                .oauth2ResourceServer(server -> server
-                        .jwt(token -> token
-                                .jwtAuthenticationConverter(getJWTConverter())
-                                .decoder(getJWTDecoder())
-                        )
-                )
-                .sessionManagement(session -> session
-                        .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-        );
+            )
+            .sessionManagement(session -> session
+                .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+    );
 
-        return httpSecurity.build();
+        return http.build();
     }
 
 

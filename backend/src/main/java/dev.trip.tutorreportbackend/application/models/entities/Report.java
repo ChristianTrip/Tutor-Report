@@ -1,5 +1,6 @@
 package dev.trip.tutorreportbackend.application.models.entities;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -54,14 +55,16 @@ public class Report {
     )
     private Semester semester;
 
+    @Enumerated(EnumType.STRING)
     @Column(
-            name = "course_class_name",
+            name = "education",
             unique = false,
-            nullable = true,
+            nullable = false,
             updatable = true
     )
-    private String courseClassName;
+    private Education education;
 
+    //@JsonFormat(pattern = "yyyy-MM-dd HH:mm", shape = JsonFormat.Shape.STRING)
     @Column(
             name = "date",
             unique = false,
@@ -79,12 +82,12 @@ public class Report {
     private Tutor tutor;
 
 
-    public Report(String problem, String solution, Duration duration, Semester semester, String courseClassName, LocalDate date) {
+    public Report(String problem, String solution, Duration duration, Semester semester, Education education, LocalDate date) {
         this.problem = problem;
         this.solution = solution;
         this.duration = duration;
         this.semester = semester;
-        this.courseClassName = courseClassName;
+        this.education = education;
         this.date = date;
     }
 }
