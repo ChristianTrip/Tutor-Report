@@ -12,13 +12,7 @@ import java.util.List;
 @AllArgsConstructor
 @RestController
 @RequestMapping("/reports")
-@CrossOrigin(
-        origins = "http://localhost:3000",
-        methods = {
-                RequestMethod.GET,
-                RequestMethod.POST
-        }
-)
+
 public class ReportController {
 
     private final ReportService reportService;

@@ -1,6 +1,6 @@
 package dev.trip.tutorreportbackend.security.services;
 
-import dev.trip.tutorreportbackend.security.entities.User;
+import dev.trip.tutorreportbackend.security.models.entities.User;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;

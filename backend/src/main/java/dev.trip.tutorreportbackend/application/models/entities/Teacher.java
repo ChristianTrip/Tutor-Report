@@ -1,6 +1,6 @@
 package dev.trip.tutorreportbackend.application.models.entities;
 
-import dev.trip.tutorreportbackend.security.entities.User;
+import dev.trip.tutorreportbackend.security.models.entities.User;
 import jakarta.persistence.Entity;
 import lombok.*;
 

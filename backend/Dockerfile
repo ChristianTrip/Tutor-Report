@@ -1,5 +1,3 @@
-# syntax=docker/dockerfile:1.4
-
 FROM --platform=$BUILDPLATFORM maven:3.8.5-eclipse-temurin-17 AS builder
 #BUILDPLATFORM — matches the current machine. (fx. linux/amd64, linux/arm64 or darwin/amd64)
 WORKDIR /workdir/server

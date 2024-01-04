@@ -29,8 +29,7 @@ const ReportCard: React.FC<ReportCardProps> = ({ report, showDate }) => {
 
     const cardTextStyle: React.CSSProperties = {
         fontFamily: 'Helvetica Neue, Helvetica, Arial, sans-serif',
-        fontSize: '16px', // Set the font size to match Bootstrap's default
-        // Other styles...
+        fontSize: '16px',
     };
 
     return (
@@ -55,7 +54,7 @@ const ReportCard: React.FC<ReportCardProps> = ({ report, showDate }) => {
                     <pre style={{ whiteSpace: 'pre-wrap', ...cardTextStyle }}>{problem}</pre>
                 </Card.Text>
                 <Card.Text style={cardTextStyle}>
-                    <strong>Solution:</strong>{' '}
+                    <strong>Løsning:</strong>{' '}
                     <pre style={{ whiteSpace: 'pre-wrap', ...cardTextStyle }}>{solution}</pre>
                 </Card.Text>
             </Card.Body>

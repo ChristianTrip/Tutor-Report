@@ -1,6 +1,9 @@
 services:
   backend:
+    container_name: backend
     build: backend
+    ports:
+      - 8080:8080
     restart: always
     secrets:
       - db-password
@@ -13,9 +16,7 @@ services:
       db:
         condition: service_healthy
   db:
-    # We use a mariadb image which supports both amd64 & arm64 architecture
-    #image: mariadb:10.6.4-focal
-    # If you really want to use MySQL, uncomment the following line
+    container_name: database
     image: mysql:latest
     environment:
       - MYSQL_DATABASE=tutorreportdb
@@ -34,6 +35,7 @@ services:
     networks:
       - spring-mysql
   frontend:
+    container_name: frontend
     build:
       context: frontend
       target: development

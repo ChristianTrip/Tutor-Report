@@ -18,10 +18,7 @@ import {Option, durationOptions, educationOptions, semesterOptions} from "./form
 // Create the MyForm component
 const MyForm: React.FC = () => {
 
-    // useState is a hook, and returns an array.
-    // first thing in the array is the current state, the second is the function that updates the state.
     const [selectedDate, setSelectedDate] = useState<Date | null>(new Date());
-
     const [problem, setProblem] = useState<string>('');
     const [solution, setSolution] = useState<string>('');
     const [duration, setDuration] = useState<Option | null>(null);
@@ -64,13 +61,10 @@ const MyForm: React.FC = () => {
             setShowAlert(true);
             return;
         }
-
-        //const isConfirmed = window.confirm('Er du sikker på at du vil indsende rapporten?');
         setShowConfirmation(true);
     };
 
     const handleConfirmation = (confirmed: boolean) => {
-        // Close the confirmation modal
         setShowConfirmation(false);
 
         if (confirmed){
@@ -102,7 +96,7 @@ const MyForm: React.FC = () => {
             'POST',
             {
                 problem: problem + "\n",
-                solution :solution + "\n",
+                solution: solution + "\n",
                 duration: durationValue,
                 semester: semesterValue,
                 education: educationValue,

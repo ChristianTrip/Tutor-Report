@@ -3,7 +3,7 @@ package dev.trip.tutorreportbackend.security.services;
 import dev.trip.tutorreportbackend.application.models.dto.UserRequest;
 import dev.trip.tutorreportbackend.application.models.dto.UserResponse;
 import dev.trip.tutorreportbackend.security.repositories.UserRepository;
-import dev.trip.tutorreportbackend.security.entities.User;
+import dev.trip.tutorreportbackend.security.models.entities.User;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.core.userdetails.UserDetails;

@@ -1,12 +1,10 @@
 package dev.trip.tutorreportbackend.security.controllers;
 
-import dev.trip.tutorreportbackend.security.dto.LoginRequest;
-import dev.trip.tutorreportbackend.security.dto.LoginResponse;
+import dev.trip.tutorreportbackend.security.models.dto.LoginRequest;
+import dev.trip.tutorreportbackend.security.models.dto.LoginResponse;
 import dev.trip.tutorreportbackend.security.services.AuthenticationService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
 @AllArgsConstructor

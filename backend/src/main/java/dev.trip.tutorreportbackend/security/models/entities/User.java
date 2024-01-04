@@ -1,4 +1,4 @@
-package dev.trip.tutorreportbackend.security.entities;
+package dev.trip.tutorreportbackend.security.models.entities;
 
 import jakarta.persistence.*;
 import lombok.*;

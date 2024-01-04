@@ -1,4 +1,4 @@
-package dev.trip.tutorreportbackend.security.dto;
+package dev.trip.tutorreportbackend.security.models.dto;
 
 import java.util.List;
 

@@ -1,7 +1,7 @@
 package dev.trip.tutorreportbackend.security.services;
 
 import dev.trip.tutorreportbackend.application.models.dto.UserResponse;
-import dev.trip.tutorreportbackend.security.entities.User;
+import dev.trip.tutorreportbackend.security.models.entities.User;
 import org.springframework.stereotype.Service;
 
 import java.util.function.Function;

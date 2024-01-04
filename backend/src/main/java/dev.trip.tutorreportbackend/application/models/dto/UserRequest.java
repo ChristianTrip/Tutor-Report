@@ -7,3 +7,5 @@ public record UserRequest(
         String password
 ) {
 }
+
+

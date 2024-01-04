@@ -10,7 +10,7 @@ interface Props{
     height: number;
 }
 
-export default function TextArea({label, value, placeholder, handleTextChange, height, width}: Props){
+export default function TextArea({label, value, placeholder, handleTextChange, height, width}: Props): React.JSX.Element {
     return (
         <Form.Group as={Row} className="mb-3">
             <Form.Label column sm={width}>

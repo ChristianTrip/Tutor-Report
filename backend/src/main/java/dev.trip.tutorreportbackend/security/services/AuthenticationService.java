@@ -1,16 +1,14 @@
 package dev.trip.tutorreportbackend.security.services;
 
-import dev.trip.tutorreportbackend.security.dto.LoginResponse;
-import dev.trip.tutorreportbackend.security.entities.Role;
-import dev.trip.tutorreportbackend.security.entities.User;
+import dev.trip.tutorreportbackend.security.models.dto.LoginResponse;
+import dev.trip.tutorreportbackend.security.models.entities.Role;
+import dev.trip.tutorreportbackend.security.models.entities.User;
 import dev.trip.tutorreportbackend.security.repositories.UserRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
-import org.springframework.security.core.context.SecurityContext;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;

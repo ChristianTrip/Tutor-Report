@@ -23,3 +23,4 @@ public class ReportMapper implements Function<Report, ReportResponse> {
         );
     }
 }
+

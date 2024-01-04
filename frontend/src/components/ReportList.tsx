@@ -26,11 +26,8 @@ function ReportList(){
     const [filterDuration, setFilterDuration] = useState<string>('');
 
     useEffect(() => {
-        // Fetch data when the component mounts
         const fetchData = async () => {
             const url: string = 'http://localhost:8080/reports/';
-            const endpoint: string = 'api/reports/add/' + localStorage.getItem("email");
-
             const reportListRequest = createGetRequestWithToken();
 
             try {
@@ -40,11 +37,9 @@ function ReportList(){
                     const data = await response.json();
                     const reportsWithDateAsDate = data.map((report: Report) => ({
                         ...report,
-
                         date: new Date(new Intl.DateTimeFormat('en-US').format(new Date(report.date)))
                     }));
                     setReports(reportsWithDateAsDate);
-                    console.log(reportsWithDateAsDate);
                 } else {
                     console.error('Report failed');
                 }

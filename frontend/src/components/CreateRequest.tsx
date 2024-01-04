@@ -1,5 +1,4 @@
 export function createRequestWithToken(method: string, bodyValues: any): RequestInit{
-
     return {
             method: method,
             headers: {
