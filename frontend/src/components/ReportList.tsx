@@ -3,7 +3,7 @@ import React, {MouseEvent, useEffect, useState} from "react";
 import {createGetRequestWithToken} from "./CreateRequest";
 import DateInput, {DateSpanInput} from "./form_elements/DatePicker";
 import ReportCard from "./form_elements/ReportCard";
-import {durationOptions, semesterOptions} from "./form_elements/DropdownOptions";
+import {durationOptions, educationOptions, semesterOptions} from "./form_elements/DropdownOptions";
 
 
 interface Report {
@@ -23,7 +23,9 @@ function ReportList(){
     const [sortOrder, setSortOrder] = useState<'asc' | 'desc'>('asc');
     const [filterStartDate, setFilterStartDate] = useState<Date | null>(null);
     const [filterEndDate, setFilterEndDate] = useState<Date | null>(null);    const [filterSemester, setFilterSemester] = useState<string>('');
-    const [filterDuration, setFilterDuration] = useState<string>('');
+    //const [filterDuration, setFilterDuration] = useState<string>('');
+    const [filterEducation, setFilterEducation] = useState<string>('');
+
 
     useEffect(() => {
         const fetchData = async () => {
@@ -72,15 +74,14 @@ function ReportList(){
 
     const handleFilter = () => {
         return reports.filter(report => {
-            console.log("report.date: " + report.date);
-            console.log("filterStartDate: " + filterStartDate);
-            console.log("filterEndDate: " + filterEndDate);
             const startDateMatch = !filterStartDate || report.date >= filterStartDate;
             const endDateMatch = !filterEndDate || report.date <= filterEndDate;
             const semesterMatch = report.semester.includes(filterSemester);
-            const durationMatch = report.duration.includes(filterDuration);
+            //const durationMatch = report.duration.includes(filterDuration);
+            const educationMatch = report.education.includes(filterEducation); // Updated field name
 
-            return startDateMatch && endDateMatch && semesterMatch && durationMatch;
+
+            return startDateMatch && endDateMatch && semesterMatch && educationMatch;
         });
     };
 
@@ -108,8 +109,8 @@ function ReportList(){
                 <Button variant="link" onClick={() => handleSort('semester')}>
                     Semester
                 </Button>
-                <Button variant="link" onClick={() => handleSort('duration')}>
-                    Varighed
+                <Button variant="link" onClick={() => handleSort('education')}>
+                    Uddannelse
                 </Button>
             </div>
             <div className="mb-2">
@@ -136,13 +137,13 @@ function ReportList(){
                 <br/>
                 <Form.Control
                     as="select"
-                    value={filterDuration}
-                    onChange={(e) => setFilterDuration(e.target.value)}
+                    value={filterEducation}
+                    onChange={(e) => setFilterEducation(e.target.value)}
                 >
-                    <option value="">Vælg varighed</option>
-                    {durationOptions.map((duration, index) => (
-                        <option key={index} value={duration.display}>
-                            {duration.display}
+                    <option value="">Vælg uddannelse</option>
+                    {educationOptions.map((education, index) => (
+                        <option key={index} value={education.display}>
+                            {education.display}
                         </option>
                     ))}
                 </Form.Control>

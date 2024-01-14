@@ -27,7 +27,7 @@ function LoginForm() {
     return (
         <Stack gap={2} className="col-md-5 mx-auto m-5">
             <Form>
-                <h1>Codelab Rapport Login 1</h1>
+                <h1>Codelab Rapport Login</h1>
                 <Form.Group className="mb-3 w-75" controlId="formBasicEmail">
                     <Form.Label>Email Adresse</Form.Label>
                     <Form.Control
