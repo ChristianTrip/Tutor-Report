@@ -1,6 +1,5 @@
-// Import necessary modules
 import React from 'react';
-import { Modal, Button, ListGroup } from 'react-bootstrap';
+import { Modal, Button } from 'react-bootstrap';
 import {Option} from './form_elements/DropdownOptions';
 import ReportCard from "./form_elements/ReportCard";
 

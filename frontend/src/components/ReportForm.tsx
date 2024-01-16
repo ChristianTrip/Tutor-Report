@@ -1,5 +1,5 @@
 import React, {CSSProperties, useState} from 'react';
-import {Form, Row, Col, Container, Alert, Modal} from 'react-bootstrap';
+import {Form, Container, Alert} from 'react-bootstrap';
 import DateInput from "./form_elements/DatePicker";
 import DropdownMenu from "./form_elements/Dropdown";
 import {format} from "date-fns";
@@ -10,13 +10,7 @@ import MissingInfoAlert from "./form_elements/MissingInfoAlert";
 import FormReview from "./FormReview";
 import {Option, durationOptions, educationOptions, semesterOptions} from "./form_elements/DropdownOptions";
 
-// Register the Danish locale
-
-
-
-
-// Create the MyForm component
-const MyForm: React.FC = () => {
+const ReportForm: React.FC = () => {
 
     const [selectedDate, setSelectedDate] = useState<Date | null>(new Date());
     const [problem, setProblem] = useState<string>('');
@@ -91,7 +85,6 @@ const MyForm: React.FC = () => {
             educationValue = education.value;
         }
 
-
         const reportRequest = createRequestWithToken(
             'POST',
             {
@@ -103,7 +96,6 @@ const MyForm: React.FC = () => {
                 date: date
             }
         )
-
         try {
             const response = await fetch(url, reportRequest);
 
@@ -124,7 +116,6 @@ const MyForm: React.FC = () => {
         }
         setShowAlert(false);
     }
-
 
     return (
         <Container className="mt-5">
@@ -227,4 +218,4 @@ const boxStyle: CSSProperties = {width: '150px', color: 'white', background: 'gr
 
 
 
-export default MyForm;
+export default ReportForm;

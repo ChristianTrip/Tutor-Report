@@ -12,7 +12,6 @@ const TopNavigationBar: React.FC<TopNavigationBarProps> = ({ showAdminTab = fals
     const history = useHistory();
 
     const handleLogout = () => {
-        // Clear the authentication token from localStorage
         localStorage.removeItem('email');
         localStorage.removeItem('token');
         localStorage.removeItem('roles');

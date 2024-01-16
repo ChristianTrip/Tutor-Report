@@ -1,10 +1,8 @@
-// src/components/NavigationBar.tsx
 import Container from 'react-bootstrap/Container';
-import Nav from 'react-bootstrap/Nav';
 import Button from 'react-bootstrap/Button';
 import Navbar from 'react-bootstrap/Navbar';
 import React from 'react';
-import {Link, Redirect, useHistory} from 'react-router-dom';
+import {Redirect, useHistory} from 'react-router-dom';
 import {NavbarText} from "react-bootstrap";
 
 const NavigationBar: React.FC = () => {
@@ -30,8 +28,6 @@ const NavigationBar: React.FC = () => {
     }
 
     let email: string|null = localStorage.getItem('email') || '';
-
-
 
     return (
         <Navbar bg="dark" data-bs-theme="dark">

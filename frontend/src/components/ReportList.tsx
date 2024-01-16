@@ -1,10 +1,9 @@
 import {Button, Container, Form, ListGroup} from "react-bootstrap";
-import React, {MouseEvent, useEffect, useState} from "react";
+import React, {useEffect, useState} from "react";
 import {createGetRequestWithToken} from "./CreateRequest";
-import DateInput, {DateSpanInput} from "./form_elements/DatePicker";
+import {DateSpanInput} from "./form_elements/DatePicker";
 import ReportCard from "./form_elements/ReportCard";
-import {durationOptions, educationOptions, semesterOptions} from "./form_elements/DropdownOptions";
-
+import { educationOptions, semesterOptions} from "./form_elements/DropdownOptions";
 
 interface Report {
     date: Date;
@@ -16,16 +15,13 @@ interface Report {
     [key: string]: Date | string;
 }
 
-
 function ReportList(){
     const [reports, setReports] = useState<Report[]>([]);
     const [sortAttribute, setSortAttribute] = useState<string>('date');
     const [sortOrder, setSortOrder] = useState<'asc' | 'desc'>('asc');
     const [filterStartDate, setFilterStartDate] = useState<Date | null>(null);
     const [filterEndDate, setFilterEndDate] = useState<Date | null>(null);    const [filterSemester, setFilterSemester] = useState<string>('');
-    //const [filterDuration, setFilterDuration] = useState<string>('');
     const [filterEducation, setFilterEducation] = useState<string>('');
-
 
     useEffect(() => {
         const fetchData = async () => {
@@ -54,18 +50,14 @@ function ReportList(){
         fetchData();
     }, []);
 
-
     const handleSort = (attribute: string) => {
         if (attribute === sortAttribute) {
-            // Toggle sort order if clicking on the same attribute
             setSortOrder(sortOrder === 'asc' ? 'desc' : 'asc');
         } else {
-            // Set new attribute and default to ascending order
             setSortAttribute(attribute);
             setSortOrder('asc');
         }
     };
-
 
     const handleDateFilterChange = (startDate: Date | null, endDate: Date | null) => {
         setFilterStartDate(startDate);
@@ -77,9 +69,7 @@ function ReportList(){
             const startDateMatch = !filterStartDate || report.date >= filterStartDate;
             const endDateMatch = !filterEndDate || report.date <= filterEndDate;
             const semesterMatch = report.semester.includes(filterSemester);
-            //const durationMatch = report.duration.includes(filterDuration);
             const educationMatch = report.education.includes(filterEducation); // Updated field name
-
 
             return startDateMatch && endDateMatch && semesterMatch && educationMatch;
         });
@@ -95,7 +85,6 @@ function ReportList(){
             return bValue.toString().localeCompare(aValue.toString());
         }
     });
-
 
 
     return (
@@ -183,14 +172,5 @@ function reportMapper(list: Report[]) {
     </ListGroup>
 
 }
-
-
-function printMouseClick(event: MouseEvent, toPrint: any){
-    console.log("x:" + event.clientX);
-    console.log("y:" + event.clientY);
-    console.log(toPrint);
-}
-
-const handleClick = (event: MouseEvent) => console.log(event);
 
 export default ReportList;

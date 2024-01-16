@@ -47,6 +47,9 @@ function LoginForm() {
                         placeholder="Adgangskode"
                         onChange={(e) => setPassword(e.target.value)}
                     />
+                    <Form.Text className="text-muted">
+                        <a href="/forgot-password">Glemt adgangskode?</a>
+                    </Form.Text>
                 </Form.Group>
                 <Button
                     variant="primary"

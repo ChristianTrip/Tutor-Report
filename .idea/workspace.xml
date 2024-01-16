@@ -5,9 +5,22 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="3f31ff46-a14b-4f56-942d-1842d8434f4a" name="Changes" comment="Refactoring and updated properties">
+      <change afterPath="$PROJECT_DIR$/frontend/src/components/ForgotPassword.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/App.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/App.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/CreateReportPage.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/HandleEvents.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/HandleEvents.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/Login.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/MainPage.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/NavigationBar.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/NavigationBar.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/components/AdminPage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/AdminPage.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/components/FormReview.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/FormReview.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/src/components/LoginForm.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/LoginForm.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/components/NavigationBar.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/NavigationBar.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/components/ReportForm.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/ReportForm.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/src/components/ReportList.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/ReportList.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/components/UserList.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/UserList.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/index.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -92,7 +105,7 @@
       <recent name="dev.trip.tutorreportbackend.application.models.entities" />
     </key>
   </component>
-  <component name="RunManager" selected="Spring Boot.Application">
+  <component name="RunManager" selected="npm.start">
     <configuration name="Application" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" temporary="true" nameIsGenerated="true">
       <envs>
         <env name="JDBC_DATABASE_URL" value="jdbc:mysql://localhost:3306/tutorreportdb?allowPublicKeyRetrieval=true" />
@@ -136,8 +149,8 @@
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Spring Boot.Application" />
         <item itemvalue="npm.start" />
+        <item itemvalue="Spring Boot.Application" />
         <item itemvalue="Docker.compose.yaml: Compose Deployment" />
       </list>
     </recent_temporary>
@@ -175,7 +188,9 @@
       <workItem from="1704356300426" duration="7251000" />
       <workItem from="1704398684965" duration="3136000" />
       <workItem from="1704405329087" duration="2739000" />
-      <workItem from="1705164375784" duration="5021000" />
+      <workItem from="1705164375784" duration="10070000" />
+      <workItem from="1705299250104" duration="3273000" />
+      <workItem from="1705423544145" duration="1067000" />
     </task>
     <task id="LOCAL-00001" summary="merged backend and frontend in from another project">
       <option name="closed" value="true" />
@@ -225,7 +240,15 @@
       <option name="project" value="LOCAL" />
       <updated>1704405755712</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="Refactoring and updated properties">
+      <option name="closed" value="true" />
+      <created>1705261826196</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1705261826196</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

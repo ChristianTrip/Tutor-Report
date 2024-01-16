@@ -1,7 +1,6 @@
-// ListUser.tsx
 import React, { useState, useEffect } from 'react';
 import { Button, Table, Modal, Form } from 'react-bootstrap';
-import { createGetRequestWithToken } from './CreateRequest'; // Adjust the import path
+import { createGetRequestWithToken } from './CreateRequest';
 
 interface User {
     email: string;
@@ -42,7 +41,7 @@ function ListUser() {
         };
 
         fetchData();
-    }, []); // Dependency array is empty to ensure the effect runs once when the component mounts
+    }, []);
 
     const handleAddUser = () => {
         console.log('Adding user:', newUserData);
@@ -118,8 +117,6 @@ function ListUser() {
                 ))}
                 </tbody>
             </Table>
-
-            {/* Add User Modal */}
             <Modal show={showAddUserModal} onHide={() => setShowAddUserModal(false)}>
                 <Modal.Header closeButton>
                     <Modal.Title>Opret bruger</Modal.Title>
@@ -170,8 +167,6 @@ function ListUser() {
                     </Button>
                 </Modal.Footer>
             </Modal>
-
-            {/* Edit User Modal */}
             <Modal show={showEditUserModal} onHide={() => setShowEditUserModal(false)}>
                 <Modal.Header closeButton>
                     <Modal.Title>Rediger bruger</Modal.Title>
