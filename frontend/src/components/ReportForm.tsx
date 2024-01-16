@@ -84,7 +84,6 @@ const ReportForm: React.FC = () => {
         if (education){
             educationValue = education.value;
         }
-
         const reportRequest = createRequestWithToken(
             'POST',
             {
@@ -103,7 +102,7 @@ const ReportForm: React.FC = () => {
             if (response.ok) {
                 setShowSuccessAlert(true);
                 setTimeout(() => {
-                    setShowSuccessAlert(false); // Hide the success alert after a certain duration (e.g., 3000 milliseconds)
+                    setShowSuccessAlert(false);
                 }, 3000);
                 console.log('Report got send');
 
